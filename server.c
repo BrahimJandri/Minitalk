@@ -10,56 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// server.c
+#include "minitalk.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
-#include <stdlib.h>
 
-static int g_msg_i = 0;
-static char g_msg_c = 0;
+void	sig_handle(int signal)
+{
+	static int	i;
+	static int	n;
+	int			nb;
 
-void bit_handler(int signum, siginfo_t *info, void *context) {
-    (void)context;  // Unused parameter
-
-    if (signum == SIGUSR1 || signum == SIGUSR2) {
-        int bit = (signum == SIGUSR1) ? 1 : 0;
-
-        char mask = 1 << g_msg_i;
-        g_msg_c += (bit << g_msg_i);
-        g_msg_i++;
-
-        if (g_msg_i == 7) {
-            printf("%c", g_msg_c);
-
-            if (g_msg_c == '\0') {
-                printf("\n");
-                exit(0);  // Exit when null character is received
-            }
-
-            g_msg_c = 0;
-            g_msg_i = 0;
-        }
-    }
+	if (signal == SIGUSR1)
+		nb = 0;
+	else
+		nb = 1;
+	n = (n << 1) + nb;
+	i++;
+	if (i == 8)
+	{
+		write(1, &n, 1);
+		i = 0;
+		n = 0;
+	}
 }
 
-int main(void) {
-    printf("Welcome To Bjandri Server!\n");
-    printf("My Server PID is: %d\n", getpid());
+int	main(void)
+{
+	struct sigaction	sigact;
 
-    struct sigaction sa;
-    sa.sa_flags = SA_SIGINFO;
-    sa.sa_sigaction = bit_handler;
-    sigemptyset(&sa.sa_mask);
-
-    sigaction(SIGUSR1, &sa, NULL);
-    sigaction(SIGUSR2, &sa, NULL);
-
-    while (1) {
-        sigaction(SIGUSR1, &sa, NULL);
-    	sigaction(SIGUSR2, &sa, NULL);   // Introduce a small delay to allow processing
-    }
-
-    return 0;
+	sigact.sa_handler = &sig_handle;
+	sigact.sa_flags = SA_RESTART;
+	sigaction(SIGUSR1, &sigact, 0);
+	sigaction(SIGUSR2, &sigact, 0);
+	printf("The Server PID is : %d\n", getpid());
+	while (1)
+		usleep(10);
+	return (0);
 }
