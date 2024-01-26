@@ -34,15 +34,11 @@ void	sig_handle(int signal)
 
 int	main(void)
 {
-	struct sigaction	sigact;
-
-	sigact.sa_handler = &sig_handle;
-	sigact.sa_flags = SA_RESTART;
 	printf("The Server PID is : %d\n", getpid());
 	while (1)
 	{
-		sigaction(SIGUSR1, &sigact, 0);
-		sigaction(SIGUSR2, &sigact, 0);
+		signal(SIGUSR1, &sig_handle);
+		signal(SIGUSR2, &sig_handle);
 	}
 	return (0);
 }

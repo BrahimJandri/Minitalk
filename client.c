@@ -63,7 +63,7 @@ void	ft_send_bit(int pid, char *str, size_t len)
 			else
 				kill(pid, SIGUSR2);
 			shift--;
-			usleep(10);
+			usleep(100);
 		}
 		i++;
 	}
