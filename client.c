@@ -49,20 +49,21 @@ size_t	ft_strlen(const char *str)
 
 void	ft_send_bit(int pid, char *str, size_t len)
 {
-	size_t i;
-	int shift;
+	size_t	i;
+	int		shift;
 
 	i = 0;
 	while (i <= len)
 	{
 		shift = 7;
-		while(shift >= 0)
+		while (shift >= 0)
 		{
-			if((str[i] >> shift) & 1)
+			if ((str[i] >> shift) & 1)
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
 			shift--;
+			usleep(10);
 		}
 		i++;
 	}
@@ -70,7 +71,7 @@ void	ft_send_bit(int pid, char *str, size_t len)
 
 int	main(int ac, char **av)
 {
-	int	pid;
+	int		pid;
 	char	*str;
 
 	if (ac != 3)

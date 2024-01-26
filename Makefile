@@ -12,18 +12,18 @@ SERVER = server
 all: $(NAME)
 
 $(SERVER):	$(SERVER).c minitalk.h 
-		@$(CC) $(CFLAGS) -o $(SERVER) $(SERVER).c
+		$(CC) $(CFLAGS) -o $(SERVER) $(SERVER).c
 
 $(CLIENT):	$(CLIENT).c minitalk.h
-		@$(CC)	$(CFLAGS)	-o	$(CLIENT)	$(CLIENT).c
+		$(CC)	$(CFLAGS)	-o	$(CLIENT)	$(CLIENT).c
 
 $(NAME):	$(SERVER) $(CLIENT)
 
 clean:
-	@$(RM) $(SERVER) $(CLIENT)
+	$(RM) $(SERVER) $(CLIENT)
 
 fclean: clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

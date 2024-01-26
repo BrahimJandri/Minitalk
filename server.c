@@ -12,17 +12,16 @@
 
 #include "minitalk.h"
 
-
 void	sig_handle(int signal)
 {
 	static int	i;
-	static int	n;
+	static char	n;
 	int			nb;
 
 	if (signal == SIGUSR1)
-		nb = 0;
-	else
 		nb = 1;
+	else
+		nb = 0;
 	n = (n << 1) + nb;
 	i++;
 	if (i == 8)
@@ -39,10 +38,11 @@ int	main(void)
 
 	sigact.sa_handler = &sig_handle;
 	sigact.sa_flags = SA_RESTART;
-	sigaction(SIGUSR1, &sigact, 0);
-	sigaction(SIGUSR2, &sigact, 0);
 	printf("The Server PID is : %d\n", getpid());
 	while (1)
-		usleep(10);
+	{
+		sigaction(SIGUSR1, &sigact, 0);
+		sigaction(SIGUSR2, &sigact, 0);
+	}
 	return (0);
 }
