@@ -6,14 +6,13 @@
 /*   By: bjandri <bjandri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:55:52 by bjandri           #+#    #+#             */
-/*   Updated: 2024/01/28 17:46:36 by bjandri          ###   ########.fr       */
+/*   Updated: 2024/01/28 18:00:01 by bjandri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-
-static  int	ft_atoi(const char *str)
+static int	ft_atoi(const char *str)
 {
 	int		sign;
 	long	resu;
@@ -38,7 +37,7 @@ static  int	ft_atoi(const char *str)
 	return (resu * sign);
 }
 
-static	size_t	ft_strlen(const char *str)
+static size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
@@ -47,7 +46,8 @@ static	size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-static	void	ft_send_bit(int pid, char *str, size_t len)
+
+static void	ft_send_bit(int pid, char *str, size_t len)
 {
 	size_t	i;
 	int		shift;
@@ -69,7 +69,7 @@ static	void	ft_send_bit(int pid, char *str, size_t len)
 	}
 }
 
-static	void	ft_client_handler(int signum)
+static void	ft_client_handler(int signum)
 {
 	if (signum == SIGUSR2)
 	{
@@ -79,7 +79,7 @@ static	void	ft_client_handler(int signum)
 
 int	main(int ac, char **av)
 {
-	int				pid;
+	int		pid;
 	char	*str;
 
 	if (ac == 3)

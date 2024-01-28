@@ -74,7 +74,7 @@ int	main(int ac, char **av)
 	int		pid;
 	char	*str;
 
-	if(ac == 3)
+	if (ac == 3)
 	{
 		pid = ft_atoi(av[1]);
 		str = av[2];

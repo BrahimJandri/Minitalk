@@ -6,7 +6,7 @@
 /*   By: bjandri <bjandri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:58:32 by bjandri           #+#    #+#             */
-/*   Updated: 2024/01/28 15:55:32 by bjandri          ###   ########.fr       */
+/*   Updated: 2024/01/28 18:05:39 by bjandri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ void	sig_handle(int signal)
 
 int	main(void)
 {
-	ft_printf("Welcome To Bjandri Minitalk 🧑🏻‍💻\n");
-	ft_printf("The Server PID is : %d\n", getpid());
+	ft_printf("________________________________________________\n\n");
+	ft_printf("  Welcome To Bjandri Minitalk Mandatory Part 🧑🏻  \n");
+	ft_printf("________________________________________________\n\n");
+	ft_printf("  The Server PID is : %d\n", getpid());
+	ft_printf("________________________________________________\n");
 	while (1)
 	{
 		signal(SIGUSR1, &sig_handle);

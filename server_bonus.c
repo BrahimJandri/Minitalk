@@ -12,13 +12,13 @@
 
 #include "minitalk.h"
 
-static	void	sig_handle(int signal, siginfo_t *info, void *context)
+static void	sig_handle(int signal, siginfo_t *info, void *context)
 {
 	static int	i;
 	static char	n;
 	int			nb;
-	(void)context;
 
+	(void)context;
 	if (signal == SIGUSR1)
 		nb = 1;
 	else
