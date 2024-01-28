@@ -6,7 +6,7 @@
 /*   By: bjandri <bjandri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:55:52 by bjandri           #+#    #+#             */
-/*   Updated: 2024/01/28 16:16:28 by bjandri          ###   ########.fr       */
+/*   Updated: 2024/01/28 17:46:36 by bjandri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static  int	ft_atoi(const char *str)
 	return (resu * sign);
 }
 
-size_t	ft_strlen(const char *str)
+static	size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
@@ -47,7 +47,7 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-void	ft_send_bit(int pid, char *str, size_t len)
+static	void	ft_send_bit(int pid, char *str, size_t len)
 {
 	size_t	i;
 	int		shift;
@@ -69,9 +69,9 @@ void	ft_send_bit(int pid, char *str, size_t len)
 	}
 }
 
-void	ft_client_handler(int signum)
+static	void	ft_client_handler(int signum)
 {
-	if (signum == SIGUSR1)
+	if (signum == SIGUSR2)
 	{
 		ft_printf("Received a signal\n");
 	}
@@ -81,19 +81,13 @@ int	main(int ac, char **av)
 {
 	int				pid;
 	char	*str;
-	int	i;
 
-	i = 0;
 	if (ac == 3)
 	{
-		signal(SIGUSR1, ft_client_handler);
+		signal(SIGUSR2, ft_client_handler);
 		pid = ft_atoi(av[1]);
 		str = av[2];
-		while (str[i])
-		{
-			ft_send_bit(pid, &str[i], ft_strlen(str));
-			i++;
-		}
+		ft_send_bit(pid, str, ft_strlen(str));
 	}
 	else
 	{
