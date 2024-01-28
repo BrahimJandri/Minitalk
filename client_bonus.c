@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjandri <bjandri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 15:59:00 by bjandri           #+#    #+#             */
-/*   Updated: 2024/01/28 15:50:56 by bjandri          ###   ########.fr       */
+/*   Created: 2024/01/28 10:55:52 by bjandri           #+#    #+#             */
+/*   Updated: 2024/01/28 16:16:28 by bjandri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	ft_atoi(const char *str)
+
+static  int	ft_atoi(const char *str)
 {
 	int		sign;
 	long	resu;
@@ -46,7 +47,6 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-
 void	ft_send_bit(int pid, char *str, size_t len)
 {
 	size_t	i;
@@ -69,23 +69,35 @@ void	ft_send_bit(int pid, char *str, size_t len)
 	}
 }
 
+void	ft_client_handler(int signum)
+{
+	if (signum == SIGUSR1)
+	{
+		ft_printf("Received a signal\n");
+	}
+}
+
 int	main(int ac, char **av)
 {
-	int		pid;
+	int				pid;
 	char	*str;
+	int	i;
 
-	if(ac == 3)
+	i = 0;
+	if (ac == 3)
 	{
+		signal(SIGUSR1, ft_client_handler);
 		pid = ft_atoi(av[1]);
 		str = av[2];
-		if (!pid)
+		while (str[i])
 		{
-			ft_printf("%s is an invalid pid ❌\n", av[1]);
-			exit(EXIT_FAILURE);
+			ft_send_bit(pid, &str[i], ft_strlen(str));
+			i++;
 		}
-		ft_send_bit(pid, str, ft_strlen(str));
 	}
 	else
-		ft_printf("Usage : ./client [Server_PID] Strint_to_send ✅");
+	{
+		ft_printf("invalid args");
+	}
 	return (0);
 }
