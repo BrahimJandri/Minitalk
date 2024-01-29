@@ -6,7 +6,7 @@
 /*   By: bjandri <bjandri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:56:50 by bjandri           #+#    #+#             */
-/*   Updated: 2024/01/29 10:59:23 by bjandri          ###   ########.fr       */
+/*   Updated: 2024/01/29 13:22:07 by bjandri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(void)
 	sigact.sa_flags = SA_SIGINFO;
 	sigemptyset(&sigact.sa_mask);
 	ft_printf("________________________________________________\n\n");
-	ft_printf("  Welcome To Bjandri Minitalk Bonus Part 🧑🏻  \n");
+	ft_printf("  Welcome To Bjandri Minitalk Bonus Part 🖥️\n");
 	ft_printf("________________________________________________\n\n");
 	ft_printf("  The Server PID is : %d\n", getpid());
 	ft_printf("________________________________________________\n");
