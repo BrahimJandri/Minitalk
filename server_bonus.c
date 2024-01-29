@@ -6,7 +6,7 @@
 /*   By: bjandri <bjandri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:56:50 by bjandri           #+#    #+#             */
-/*   Updated: 2024/01/28 17:55:27 by bjandri          ###   ########.fr       */
+/*   Updated: 2024/01/29 10:59:23 by bjandri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ int	main(void)
 		sigaction(SIGUSR2, &sigact, NULL);
 		pause();
 	}
+	return 0;
 }

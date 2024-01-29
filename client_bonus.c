@@ -6,7 +6,7 @@
 /*   By: bjandri <bjandri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:55:52 by bjandri           #+#    #+#             */
-/*   Updated: 2024/01/28 18:00:01 by bjandri          ###   ########.fr       */
+/*   Updated: 2024/01/29 10:48:35 by bjandri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,14 @@ int	main(int ac, char **av)
 		signal(SIGUSR2, ft_client_handler);
 		pid = ft_atoi(av[1]);
 		str = av[2];
+		if (!pid)
+		{
+			ft_printf("%s is an invalid pid ❌\n", av[1]);
+			exit(EXIT_FAILURE);
+		}
 		ft_send_bit(pid, str, ft_strlen(str));
 	}
 	else
-	{
-		ft_printf("invalid args");
-	}
+		ft_printf("Usage : ./client [Server_PID] Strint_to_send ✅");
 	return (0);
 }
