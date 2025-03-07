@@ -6,7 +6,7 @@
 /*   By: bjandri <bjandri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:59:00 by bjandri           #+#    #+#             */
-/*   Updated: 2024/01/28 15:50:56 by bjandri          ###   ########.fr       */
+/*   Updated: 2025/03/07 09:48:39 by bjandri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_send_bit(int pid, char *str, size_t len)
 			else
 				kill(pid, SIGUSR2);
 			shift--;
-			usleep(300);
+			usleep(100);
 		}
 		i++;
 	}
@@ -86,6 +86,6 @@ int	main(int ac, char **av)
 		ft_send_bit(pid, str, ft_strlen(str));
 	}
 	else
-		ft_printf("Usage : ./client [Server_PID] Strint_to_send ✅");
+		ft_printf("Usage : ./client [Server_PID] String_to_send ✅");
 	return (0);
 }
